@@ -1,0 +1,19 @@
+{
+  "name": "dekast-kiosk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kiosk-app (React Native) voor sportschool De Kast - MVP-basis",
+  "scripts": {
+    "android": "react-native run-android",
+    "start": "react-native start"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-native": "0.75.4",
+    "react-native-nfc-manager": "^3.16.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "5.5.4"
+  }
+}
