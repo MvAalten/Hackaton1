@@ -3,7 +3,24 @@
 De kiosk-app voor de Android-terminal. Bevat een menu met de vier flows, een
 NFC-lezer (met mock-modus) en een API-client naar de backend.
 
-## Belangrijk: dit is de broncode, nog geen volledig project
+## Snelste manier om te testen: als website
+
+Geen Android Studio of emulator nodig — via `react-native-web` draait deze app
+ook gewoon in de browser (checkin gebruikt dan altijd de mocktag):
+
+```bash
+npm install
+npm run web
+```
+
+Opent automatisch `http://localhost:3000`. Zorg dat de backend al draait.
+`npm run build:web` maakt een statische productie-build in `web-dist/`.
+
+De webversie gebruikt automatisch `src/config.web.ts` en `src/nfc.web.ts` in
+plaats van `config.ts`/`nfc.ts` (via de `.web.ts`-bestandsextensie); de
+Android-app hieronder blijft gewoon `config.ts`/`nfc.ts` gebruiken.
+
+## Als Android-app: dit is de broncode, nog geen volledig project
 
 In deze map staat de `src/` met alle app-code, plus `package.json` en
 `tsconfig.json`. De **native Android-projectbestanden** (map `android/`) zitten
@@ -48,9 +65,11 @@ emulator kunt testen. Zet op `false` op de echte kiosk.
 ```
 frontend/src/
   App.tsx            # menu + schermwisseling
-  config.ts          # API-URL en NFC-mock instelling
+  config.ts          # API-URL en NFC-mock instelling (Android)
+  config.web.ts       # idem, voor de webversie (localhost i.p.v. 10.0.2.2)
   api.ts             # alle backend-aanroepen op één plek
-  nfc.ts             # NFC-tag uitlezen (met mock)
+  nfc.ts             # NFC-tag uitlezen (met mock, Android)
+  nfc.web.ts          # idem, voor de webversie (altijd gemockt)
   screens/
     CheckinScreen.tsx    # Flow 1
     CursusScreen.tsx     # Flow 2

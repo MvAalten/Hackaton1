@@ -8,6 +8,7 @@ backend/de_kast.db
 frontend/node_modules/
 frontend/android/
 frontend/ios/
+frontend/web-dist/
 npm-debug.log
 yarn-error.log
 

@@ -20,8 +20,9 @@ zelf verder op te bouwen richting de MVP.
 ```
 
 - **`backend/`** — FastAPI + SQLite. Data, endpoints en dummydata. **Werkt en draait.**
-- **`frontend/`** — React Native. Menu, NFC-lezer en API-client. Broncode klaar
-  om in een React Native-project te zetten.
+- **`frontend/`** — React Native. Menu, NFC-lezer en API-client. Draait direct als
+  website via `react-native-web` (`npm run web`), of als Android-app na het
+  eenmalig genereren van een React Native-project.
 
 ## De vier flows (uit de flowcharts)
 
@@ -34,17 +35,16 @@ zelf verder op te bouwen richting de MVP.
 
 ## Snel starten
 
-1. **Backend** (zie [backend/README.md](backend/README.md)):
-   ```bash
-   cd backend
-   python -m venv .venv && .venv\Scripts\activate
-   pip install -r requirements.txt
-   uvicorn app.main:app --reload
-   ```
-   Test de flows direct in de browser via `http://127.0.0.1:8000/docs`.
+Zie [STARTEN.md](STARTEN.md) voor de volledige uitleg. Kortste route:
 
-2. **Frontend** (zie [frontend/README.md](frontend/README.md)) — de app-broncode
-   in een gegenereerd React Native-project zetten en op een Android-emulator draaien.
+- Windows: `.\start.ps1`
+- Linux: `./start.sh`
+
+Dit start de backend (`http://127.0.0.1:8000/docs`) en de frontend als website
+(`http://localhost:3000`, via `react-native-web` — geen emulator nodig) in één keer.
+
+Losse onderdelen: [backend/README.md](backend/README.md) en
+[frontend/README.md](frontend/README.md).
 
 ## Wat is bewust nog leeg (de "eigen functionaliteit")
 
@@ -62,13 +62,3 @@ overal met `TODO` gemarkeerd en laten jullie zelf bouwen:
 Het lid heeft in de code een extra veld `tag_uid` (het unieke NFC-tagnummer).
 Dat staat niet in het originele ERD, maar is noodzakelijk omdat de kiosk een lid
 opzoekt via zijn tag. **Werk dit terug in het ERD** voor de ontwerpdocumentatie.
-
-## Versiebeheer
-
-Nog geen git-repo. Initialiseer met:
-
-```bash
-git init && git add . && git commit -m "Initiele MVP-basis De Kast"
-```
-
-De `.gitignore` (venv, node_modules, database, native buildmappen) staat al klaar.
