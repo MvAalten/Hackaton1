@@ -6,9 +6,10 @@
  * TODO: LID_ID staat vast op 2; koppel dit aan het gescande lid.
  */
 import React, { useState } from 'react';
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { zegAbonnementOp } from '../api';
+import { vraagBevestiging } from '../ui';
 
 const LID_ID = 2; // TODO: vervangen door het gescande lid
 
@@ -17,21 +18,19 @@ export default function OpzeggenScreen({ onTerug }: { onTerug: () => void }) {
 
   const opzeggen = () => {
     // Bevestiging vragen vóór het daadwerkelijk opzeggen.
-    Alert.alert('Weet je het zeker?', 'Wil je je abonnement echt opzeggen?', [
-      { text: 'Nee', style: 'cancel' },
-      {
-        text: 'Ja, opzeggen',
-        style: 'destructive',
-        onPress: async () => {
-          try {
-            const uit = await zegAbonnementOp(LID_ID, true);
-            setMelding(uit.melding);
-          } catch {
-            setMelding('Opzeggen mislukt. Draait de backend?');
-          }
-        },
+    vraagBevestiging(
+      'Weet je het zeker?',
+      'Wil je je abonnement echt opzeggen?',
+      'Ja, opzeggen',
+      async () => {
+        try {
+          const uit = await zegAbonnementOp(LID_ID, true);
+          setMelding(uit.melding);
+        } catch {
+          setMelding('Opzeggen mislukt. Draait de backend?');
+        }
       },
-    ]);
+    );
   };
 
   return (

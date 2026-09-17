@@ -10,9 +10,10 @@
  *    plaats van het vaste moment hieronder (zie flowchart 4).
  */
 import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Coach, getCoaches, planAfspraak } from '../api';
+import { toonMelding } from '../ui';
 
 const LID_ID = 1; // TODO: vervangen door het gescande lid
 
@@ -22,16 +23,16 @@ export default function CoachScreen({ onTerug }: { onTerug: () => void }) {
   useEffect(() => {
     getCoaches()
       .then(setCoaches)
-      .catch(() => Alert.alert('Fout', 'Kon coaches niet laden. Draait de backend?'));
+      .catch(() => toonMelding('Fout', 'Kon coaches niet laden. Draait de backend?'));
   }, []);
 
   const plannen = async (coach: Coach) => {
     try {
       // Vast moment als voorbeeld - vervang door een gekozen datum/tijd.
       const uit = await planAfspraak(LID_ID, coach.id, '2026-10-01', '10:00:00');
-      Alert.alert(uit.ok ? 'Gelukt' : 'Niet gelukt', uit.melding);
+      toonMelding(uit.ok ? 'Gelukt' : 'Niet gelukt', uit.melding);
     } catch {
-      Alert.alert('Fout', 'Afspraak plannen mislukt.');
+      toonMelding('Fout', 'Afspraak plannen mislukt.');
     }
   };
 

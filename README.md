@@ -44,7 +44,7 @@ Dit start de backend (`http://127.0.0.1:8000/docs`) en de frontend als website
 (`http://localhost:3000`, via `react-native-web` — geen emulator nodig) in één keer.
 
 Losse onderdelen: [backend/README.md](backend/README.md) en
-[frontend/README.md](frontend/README.md).
+[frontend/README.md](frontend/README.md) (bevatten ook hoe je de tests draait).
 
 ## Wat is bewust nog leeg (de "eigen functionaliteit")
 

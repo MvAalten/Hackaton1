@@ -54,3 +54,16 @@ geven een antwoord terug, automatische API-docs.
 |------------|---------------|-----------------------|
 | `04A1B2C3` | Anna de Vries | onbeperkt + addendum  |
 | `04D4E5F6` | Bram Jansen   | 1x per week           |
+
+## Tests draaien
+
+```bash
+pip install -r requirements.txt -r requirements-dev.txt
+pytest
+```
+
+De tests in `tests/` draaien tegen een losse in-memory testdatabase (niet
+`de_kast.db`) en dekken de vier endpoints/flows. Twee tests documenteren
+bewust het huidige (onvolledige) gedrag van de nog-niet-gebouwde
+businessregels (dubbele inschrijving / dubbelboeking) - zie de `TODO`'s
+hierboven.

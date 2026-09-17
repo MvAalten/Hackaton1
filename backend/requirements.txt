@@ -1,6 +1,10 @@
 # Backend dependencies - De Kast
 # Installeer met:  pip install -r requirements.txt
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-sqlalchemy==2.0.35
-pydantic==2.9.2
+#
+# Geen strikte pins: pydantic==2.9.2 (en oudere fastapi/uvicorn-versies) hebben
+# geen prebuilt wheels voor recente Python-versies (bv. 3.14), waardoor pip
+# pydantic-core vanaf source probeert te bouwen en faalt zonder Rust-toolchain.
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.6
+sqlalchemy>=2.0.35
+pydantic>=2.9.2

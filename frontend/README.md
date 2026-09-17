@@ -70,12 +70,33 @@ frontend/src/
   api.ts             # alle backend-aanroepen op één plek
   nfc.ts             # NFC-tag uitlezen (met mock, Android)
   nfc.web.ts          # idem, voor de webversie (altijd gemockt)
+  ui.ts              # meldingen/bevestigingen via Alert.alert (Android)
+  ui.web.ts           # idem, voor de webversie (window.alert/confirm - zie hieronder)
   screens/
     CheckinScreen.tsx    # Flow 1
     CursusScreen.tsx     # Flow 2
     OpzeggenScreen.tsx   # Flow 3
     CoachScreen.tsx      # Flow 4
+  __tests__/         # vitest-tests voor api.ts en ui.web.ts
 ```
+
+> **Bekende valkuil:** `react-native-web`'s `Alert.alert` is een no-op (doet
+> niets in de browser). Gebruik daarom `ui.ts`'s `toonMelding`/`vraagBevestiging`
+> in plaats van `Alert` rechtstreeks te importeren - anders verschijnt er op
+> de webversie geen melding en werkt een bevestigingsflow (zoals opzeggen)
+> helemaal niet.
+
+## Tests draaien
+
+```bash
+npm install
+npm test
+```
+
+Draait de vitest-suite in `src/__tests__/` (de API-client en de web-meldingen/
+bevestigingen). Dit dekt alleen platformonafhankelijke logica, geen
+React-componenten - er is bewust geen React Native Testing Library-opzet
+toegevoegd zolang dit nog geen volledig gegenereerd RN-project is.
 
 ## Wat bouwen jullie zelf (zie `TODO` in de code)
 

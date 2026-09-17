@@ -7,9 +7,10 @@
  * (zie CheckinScreen) en onthoud je welk lid is ingelogd.
  */
 import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Cursus, getCursussen, schrijfInVoorCursus } from '../api';
+import { toonMelding } from '../ui';
 
 const LID_ID = 1; // TODO: vervangen door het gescande lid
 
@@ -19,15 +20,15 @@ export default function CursusScreen({ onTerug }: { onTerug: () => void }) {
   useEffect(() => {
     getCursussen()
       .then(setCursussen)
-      .catch(() => Alert.alert('Fout', 'Kon cursussen niet laden. Draait de backend?'));
+      .catch(() => toonMelding('Fout', 'Kon cursussen niet laden. Draait de backend?'));
   }, []);
 
   const inschrijven = async (cursus: Cursus) => {
     try {
       const uit = await schrijfInVoorCursus(LID_ID, cursus.id);
-      Alert.alert(uit.ok ? 'Gelukt' : 'Niet gelukt', uit.melding);
+      toonMelding(uit.ok ? 'Gelukt' : 'Niet gelukt', uit.melding);
     } catch {
-      Alert.alert('Fout', 'Inschrijven mislukt.');
+      toonMelding('Fout', 'Inschrijven mislukt.');
     }
   };
 
